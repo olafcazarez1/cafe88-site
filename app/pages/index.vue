@@ -15,28 +15,18 @@
           </p>
 
           <div class="mt-4">
-            <NuxtLink
-              to="/products"
-              class="btn btn-cafe88 btn-lg me-2"
-            >
+            <NuxtLink to="/products" class="btn btn-cafe88 btn-lg me-2">
               Ver Productos
             </NuxtLink>
 
-            <a
-              href="#conocenos"
-              class="btn btn-outline-dark btn-lg"
-            >
+            <a href="#conocenos" class="btn btn-outline-dark btn-lg">
               Conócenos
             </a>
           </div>
         </div>
 
         <div class="col-md-5 text-center mt-4 mt-md-0">
-          <img
-            src="/images/products/cafe88-black.jpg"
-            alt="Cafe88"
-            class="img-fluid hero-product"
-          >
+          <img src="/images/products/cafe88-black.jpg" alt="Cafe88" class="img-fluid hero-product">
         </div>
 
       </div>
@@ -83,19 +73,11 @@
 
       <div class="row g-4">
 
-        <div
-          class="col-md-4"
-          v-for="product in featuredProducts"
-          :key="product.id"
-        >
+        <div class="col-md-4" v-for="product in featuredProducts" :key="product.id">
           <div class="card product-card h-100">
 
             <div class="product-image-wrapper">
-              <img
-                :src="product.image"
-                :alt="product.name"
-                class="product-card-image"
-              >
+              <img :src="product.image" :alt="product.name" class="product-card-image">
             </div>
 
             <div class="card-body text-center">
@@ -108,10 +90,7 @@
                 {{ product.description }}
               </p>
 
-              <NuxtLink
-                to="/products"
-                class="btn btn-cafe88 btn-sm"
-              >
+              <NuxtLink to="/products" class="btn btn-cafe88 btn-sm">
                 Ver producto
               </NuxtLink>
 
@@ -130,11 +109,7 @@
       <div class="row align-items-center">
 
         <div class="col-md-6 mb-4 mb-md-0">
-          <img
-            src="/images/products/cafe88-bags.jpg"
-            alt="Cafe88 productos"
-            class="img-fluid rounded-4 shadow-lg"
-          >
+          <img src="/images/products/cafe88-bags.jpg" alt="Cafe88 productos" class="img-fluid rounded-4 shadow-lg">
         </div>
 
         <div class="col-md-6">
@@ -161,10 +136,7 @@
             <li class="mb-2">🏆 Reconocimientos nacionales</li>
           </ul>
 
-          <NuxtLink
-            to="/products"
-            class="btn btn-light mt-3"
-          >
+          <NuxtLink to="/products" class="btn btn-light mt-3">
             Ver productos
           </NuxtLink>
         </div>
@@ -174,27 +146,83 @@
     </section>
 
     <!-- Conocenos -->
-    <section
-      id="conocenos"
-      class="card section-card mb-5"
-    >
+    <section id="conocenos" class="card section-card mb-5">
       <div class="card-body p-4 p-md-5">
 
-        <h2 class="fw-bold mb-3">
-          Conócenos
+        <span class="products-eyebrow">
+          Cerro de la Troje
+        </span>
+
+        <h2 class="fw-bold mt-2 mb-4">
+          Tradición e innovación
         </h2>
 
         <p class="fs-5">
-          Somos una empresa veracruzana dedicada a ofrecer café premium
-          y productos gourmet elaborados con pasión, tradición y calidad.
+          Desde 2004, en Cerro de la Troje cultivamos el orgullo de ser una
+          empresa 100% veracruzana, comprometida con la calidad, el bienestar
+          de nuestros clientes y el respeto por nuestro entorno natural.
         </p>
 
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-          Integer vitae justo sed lorem interdum consequat. Curabitur
-          fermentum, ipsum non tincidunt dignissim, erat ligula
-          pellentesque lorem, vitae porta justo neque at arcu.
+          Para llevar esta pasión a tu mesa, hemos desarrollado dos marcas
+          que expresan distintas formas de disfrutar la riqueza del café:
+          Café 88 y Faja de Oro.
         </p>
+
+        <div class="row g-4 mt-3">
+
+          <div class="col-md-6">
+            <div class="brand-story-card h-100">
+
+              <h3 class="h4 fw-bold">
+                Café 88
+              </h3>
+
+              <p class="brand-story-subtitle">
+                La excelencia en cada grano
+              </p>
+
+              <p>
+                Nuestro café orgánico y de especialidad crece bajo el bosque
+                de niebla de Chocamán, Veracruz, en la Finca Las Ceibas,
+                ubicada entre los 1,400 y 1,500 msnm.
+              </p>
+
+              <p class="mb-0">
+                Su perfil destaca por su dulzura, acidez limpia y atributos
+                excepcionales en taza.
+              </p>
+
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="brand-story-card h-100">
+
+              <h3 class="h4 fw-bold">
+                Faja de Oro
+              </h3>
+
+              <p class="brand-story-subtitle">
+                El lado gourmet del café
+              </p>
+
+              <p>
+                Inspirada en la zona montañosa central de Veracruz, Faja de Oro
+                transforma la riqueza del café en experiencias culinarias
+                únicas.
+              </p>
+
+              <p class="mb-0">
+                Nuestra línea incluye salsas artesanales, jaleas aromáticas,
+                confitería y otros productos gourmet elaborados con procesos
+                de alta calidad.
+              </p>
+
+            </div>
+          </div>
+
+        </div>
 
       </div>
     </section>
@@ -203,62 +231,91 @@
     <section class="card section-card mb-5">
       <div class="card-body p-4 p-md-5">
 
-        <h2 class="fw-bold mb-3">
+        <span class="products-eyebrow">
+          Desde 2004
+        </span>
+
+        <h2 class="fw-bold mt-2 mb-4">
           Nuestra Historia
         </h2>
 
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-          Suspendisse potenti. Integer non turpis sed ipsum malesuada
-          vestibulum. Curabitur luctus, mauris vel vulputate aliquet,
-          risus libero tincidunt justo, vel feugiat magna ipsum sed lorem.
+        <p class="fs-5">
+          Cerro de la Troje nació con una misión clara: devolverle el valor
+          justo al esfuerzo de nuestra tierra.
         </p>
 
         <p>
-          Vivamus malesuada, sapien non tincidunt malesuada, lectus ligula
-          gravida risus, et elementum neque turpis et sapien. Sed tristique
-          dignissim nisl, sed volutpat velit aliquet nec.
+          Durante la década de los noventa, las crisis cafetaleras afectaron
+          profundamente a pequeños productores y cortadores. Ante esta
+          realidad, decidimos alejarnos de los mercados masivos y enfocarnos
+          en lo extraordinario: el café de especialidad.
+        </p>
+
+        <p>
+          Cada grano requiere cuidado artesanal, precisión y respeto por los
+          tiempos de la naturaleza. Por eso mantenemos un compromiso constante
+          con la excelencia técnica, el comercio justo y la trazabilidad de
+          nuestros productos.
+        </p>
+
+        <p class="history-closing mb-0">
+          De nuestra plantación a tu taza. Descubre el verdadero sabor del
+          café de especialidad.
         </p>
 
       </div>
     </section>
 
     <!-- Mission / Vision -->
-    <section class="row mb-5">
+    <section class="row g-4 mb-5">
 
       <div class="col-md-6">
-        <div class="card section-card h-100 mb-4">
-          <div class="card-body p-4">
+        <article class="card section-card h-100">
+          <div class="card-body p-4 p-md-5">
 
-            <h3 class="fw-bold">
+            <span class="products-eyebrow">
+              Nuestro propósito
+            </span>
+
+            <h2 class="h3 fw-bold mt-2 mb-3">
               Misión
-            </h3>
+            </h2>
 
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipiscing elit.
-              Nuestro compromiso es ofrecer productos de calidad con
-              identidad veracruzana.
+            <p class="mb-0">
+              Producir y comercializar café orgánico de especialidad y
+              productos gourmet derivados de la más alta calidad, honrando
+              el trabajo de los productores veracruzanos y preservando el
+              entorno natural, para entregar en cada taza y en cada producto
+              una experiencia única que supere las expectativas de los
+              paladares más exigentes.
             </p>
 
           </div>
-        </div>
+        </article>
       </div>
 
       <div class="col-md-6">
-        <div class="card section-card h-100 mb-4">
-          <div class="card-body p-4">
+        <article class="card section-card h-100">
+          <div class="card-body p-4 p-md-5">
 
-            <h3 class="fw-bold">
+            <span class="products-eyebrow">
+              Hacia 2031
+            </span>
+
+            <h2 class="h3 fw-bold mt-2 mb-3">
               Visión
-            </h3>
+            </h2>
 
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipiscing elit.
-              Buscamos compartir el sabor y la tradición del café mexicano.
+            <p class="mb-0">
+              Ser reconocidos a nivel nacional como la marca referente de café
+              de especialidad y productos gourmet de Veracruz, consolidando a
+              Café 88 y Faja de Oro en el mercado digital y comercial, siempre
+              con un firme compromiso con el comercio justo, la innovación
+              culinaria y la excelencia.
             </p>
 
           </div>
-        </div>
+        </article>
       </div>
 
     </section>

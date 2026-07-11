@@ -102,6 +102,23 @@ body {
   font-weight: 700;
 }
 
+.brand-story-card {
+  background-color: var(--cafe88-cream);
+  border-radius: 18px;
+  padding: 1.75rem;
+}
+
+.brand-story-subtitle {
+  color: var(--cafe88-red);
+  font-weight: 700;
+}
+
+.history-closing {
+  color: var(--cafe88-red);
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
 .product-card {
   border: none;
   border-radius: 18px;
