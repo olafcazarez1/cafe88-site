@@ -1,41 +1,33 @@
 <template>
-  <article class="card product-catalog-card h-100">
+  <NuxtLink :to="`/products/${product.product_id}`" class="product-card-link">
+    <article class="card product-catalog-card h-100">
 
-    <NuxtLink
-      :to="`/products/${product.product_id}`"
-      class="product-catalog-image-wrapper"
-    >
-      <img
-        :src="product.image_url"
-        :alt="product.short_name"
-        class="product-catalog-image"
-        loading="lazy"
-      >
-    </NuxtLink>
-
-    <div class="card-body d-flex flex-column">
-
-      <div class="mb-2">
-        <span class="product-category">
-          {{ product.category?.name || 'Producto' }}
-        </span>
+      <div class="product-catalog-image-wrapper">
+        <img :src="product.image_url" :alt="product.short_name" class="product-catalog-image" loading="lazy">
       </div>
 
-      <h2 class="product-catalog-title">
-        {{ product.short_name }}
-      </h2>
+      <div class="card-body d-flex flex-column">
 
-      <p class="product-catalog-code">
-        {{ product.code }}
-      </p>
+        <div class="mb-2">
+          <span class="product-category">
+            {{ product.category?.name || 'Producto' }}
+          </span>
+        </div>
 
-      <p class="product-catalog-description">
-        {{ shortDescription }}
-      </p>
+        <h2 class="product-catalog-title">
+          {{ product.short_name }}
+        </h2>
 
-      <div class="mt-auto">
+        <p class="product-catalog-code">
+          {{ product.code }}
+        </p>
 
-        <div class="mb-3">
+        <p class="product-catalog-description">
+          {{ shortDescription }}
+        </p>
+
+        <div class="mt-auto">
+
           <template v-if="hasPrice">
             <div class="product-price">
               {{ formattedPrice }}
@@ -46,33 +38,20 @@
             </small>
           </template>
 
-          <span
-            v-else
-            class="text-muted"
-          >
+          <span v-else class="text-muted">
             Precio no disponible
           </span>
-        </div>
 
-        <div
-          v-if="hasPrice && !isAvailable"
-          class="product-stock-status text-danger mb-3"
-        >
-          Agotado
-        </div>
+          <div v-if="hasPrice && !isAvailable" class="product-stock-status text-danger mt-2">
+            Agotado
+          </div>
 
-        <NuxtLink
-          :to="`/products/${product.product_id}`"
-          class="btn btn-cafe88 w-100"
-        >
-          Ver producto
-        </NuxtLink>
+        </div>
 
       </div>
 
-    </div>
-
-  </article>
+    </article>
+  </NuxtLink>
 </template>
 
 <script setup lang="ts">

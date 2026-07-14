@@ -1,25 +1,15 @@
 <template>
   <div>
 
-    <div
-      v-if="pending"
-      class="product-detail-state"
-    >
-      <div
-        class="spinner-border"
-        role="status"
-        aria-label="Cargando producto"
-      />
+    <div v-if="pending" class="product-detail-state">
+      <div class="spinner-border" role="status" aria-label="Cargando producto" />
 
       <p class="mt-3 mb-0">
         Cargando producto...
       </p>
     </div>
 
-    <div
-      v-else-if="error"
-      class="product-detail-state"
-    >
+    <div v-else-if="error" class="product-detail-state">
       <h1 class="h3">
         Producto no disponible
       </h1>
@@ -28,21 +18,15 @@
         No fue posible consultar este producto.
       </p>
 
-      <NuxtLink
-        to="/products"
-        class="btn btn-cafe88"
-      >
+      <NuxtLink to="/products" class="btn btn-cafe88">
         Volver a productos
       </NuxtLink>
     </div>
 
     <template v-else-if="product">
 
-      <nav
-        aria-label="breadcrumb"
-        class="mb-4"
-      >
-        <ol class="breadcrumb">
+      <nav aria-label="breadcrumb" class="mb-3">
+        <ol class="breadcrumb small mb-0">
 
           <li class="breadcrumb-item">
             <NuxtLink to="/">
@@ -56,54 +40,42 @@
             </NuxtLink>
           </li>
 
-          <li
-            class="breadcrumb-item active"
-            aria-current="page"
-          >
+          <li class="breadcrumb-item active">
             {{ product.short_name }}
           </li>
 
         </ol>
       </nav>
 
-      <section class="product-detail-card">
+      <section class="product-detail-layout">
 
-        <div class="row g-5 align-items-start">
+        <div class="row g-4 align-items-start">
 
-          <div class="col-lg-6">
-
-            <div class="product-detail-image-wrapper">
-              <img
-                :src="product.image_url"
-                :alt="product.short_name"
-                class="product-detail-image"
-              >
+          <!-- Image -->
+          <div class="col-lg-4">
+            <div class="product-detail-image-box">
+              <img :src="product.image_url" :alt="product.short_name" class="product-detail-image">
             </div>
-
           </div>
 
-          <div class="col-lg-6">
+          <!-- Product information -->
+          <div class="col-lg-5">
 
-            <div class="mb-3">
-
+            <div class="mb-2">
               <span class="product-category">
                 {{ product.category?.name || 'Producto' }}
               </span>
 
-              <span
-                v-if="product.subcategory?.name"
-                class="text-muted ms-2"
-              >
+              <span v-if="product.subcategory?.name" class="text-muted ms-2">
                 · {{ product.subcategory.name }}
               </span>
-
             </div>
 
             <h1 class="product-detail-title">
               {{ product.short_name }}
             </h1>
 
-            <p class="product-detail-code">
+            <p class="product-detail-code mb-3">
               Código: {{ product.code }}
             </p>
 
@@ -111,121 +83,94 @@
               {{ product.description }}
             </div>
 
-            <hr class="my-4">
-
-            <div
-              v-if="availableMeasures.length"
-              class="mb-4"
-            >
-              <label
-                for="measure"
-                class="form-label fw-semibold"
-              >
-                Presentación
-              </label>
-
-              <select
-                id="measure"
-                v-model="selectedMeasureId"
-                class="form-select form-select-lg"
-              >
-                <option
-                  v-for="stockItem in availableMeasures"
-                  :key="stockItem.measure_id"
-                  :value="stockItem.measure_id"
-                >
-                  {{ stockItem.name }}
-                </option>
-              </select>
+            <div v-if="product.taxes?.length" class="mt-4">
+              <small class="text-muted">
+                Impuestos aplicables:
+                {{product.taxes.map(tax => tax.name).join(', ')}}
+              </small>
             </div>
 
-            <div class="purchase-panel">
+          </div>
+
+          <!-- Purchase panel -->
+          <div class="col-lg-3">
+
+            <aside class="purchase-card">
 
               <template v-if="selectedStock">
 
-                <div
-                  v-if="hasPrice"
-                  class="product-detail-price"
-                >
+                <div v-if="hasPrice" class="product-detail-price">
                   {{ formattedPrice }}
                 </div>
 
-                <p
-                  v-else
-                  class="text-muted mb-3"
-                >
+                <p v-else class="text-muted mb-3">
                   Precio no disponible
                 </p>
 
-                <p
-                  v-if="hasDiscount"
-                  class="product-discount"
-                >
-                  Descuento: {{ selectedStock.discount }}%
+                <p v-if="hasDiscount" class="product-discount">
+                  {{ selectedStock.discount }}% de descuento
                 </p>
 
-                <p
-                  v-if="isAvailable"
-                  class="product-availability text-success"
-                >
-                  Disponible
+                <p v-if="isAvailable" class="product-availability text-success">
+                  Stock disponible
                 </p>
 
-                <p
-                  v-else
-                  class="product-availability text-danger"
-                >
+                <p v-else class="product-availability text-danger">
                   Agotado
                 </p>
 
               </template>
 
-              <div class="row g-3 mt-1">
+              <div v-if="availableMeasures.length" class="mb-3">
+                <label for="measure" class="form-label fw-semibold">
+                  Presentación
+                </label>
 
-                <div class="col-sm-4">
+                <select id="measure" v-model="selectedMeasureId" class="form-select">
+                  <option v-for="stockItem in availableMeasures" :key="stockItem.measure_id"
+                    :value="stockItem.measure_id">
+                    {{ stockItem.name }}
+                  </option>
+                </select>
+              </div>
 
-                  <label
-                    for="quantity"
-                    class="form-label fw-semibold"
-                  >
-                    Cantidad
-                  </label>
+              <div class="mb-3">
 
-                  <input
-                    id="quantity"
-                    v-model.number="quantity"
-                    type="number"
-                    min="1"
-                    :max="maximumQuantity"
-                    class="form-control form-control-lg"
-                    :disabled="!canPurchase"
-                  >
+                <label for="quantity" class="form-label fw-semibold">
+                  Cantidad
+                </label>
 
-                </div>
-
-                <div class="col-sm-8 d-flex align-items-end">
-
-                  <button
-                    type="button"
-                    class="btn btn-cafe88 btn-lg w-100"
-                    :disabled="!canPurchase"
-                    @click="addToCart"
-                  >
-                    Agregar al carrito
-                  </button>
-
-                </div>
+                <input id="quantity" v-model.number="quantity" type="number" min="1" :max="maximumQuantity"
+                  class="form-control" :disabled="!canPurchase">
 
               </div>
 
-              <p
-                v-if="!canPurchase"
-                class="small text-muted mt-3 mb-0"
-              >
+              <button type="button" class="btn btn-cafe88 w-100 mb-2 add-cart-button"
+                :class="{ 'is-added': addedToCart }" :disabled="!canPurchase || cartPending" @click="addToCart">
+                <span v-if="cartPending" class="spinner-border spinner-border-sm me-2" aria-hidden="true" />
+
+                <span v-else-if="addedToCart">
+                  ✓ Agregado al carrito
+                </span>
+
+                <span v-else>
+                  Agregar al carrito
+                </span>
+              </button>
+
+              <div v-if="cartError" class="alert alert-danger py-2 mt-3 mb-0">
+                {{ cartError }}
+              </div>
+
+              <button type="button" class="btn btn-outline-dark w-100" :disabled="!canPurchase">
+                Comprar ahora
+              </button>
+
+              <p v-if="!canPurchase" class="small text-muted mt-3 mb-0">
                 Este producto todavía no está disponible para compra.
               </p>
 
-            </div>
+            </aside>
 
           </div>
 
@@ -276,6 +221,14 @@ type WarehouseProduct = {
   taxes: ProductTax[]
   stock: ProductStock[]
 }
+
+const {
+  addItem,
+  pending: cartPending
+} = useCart()
+
+const addedToCart = ref(false)
+const cartError = ref('')
 
 const route = useRoute()
 
@@ -360,17 +313,34 @@ const formattedPrice = computed(() => {
   }).format(selectedStock.value?.price ?? 0)
 })
 
-function addToCart() {
-  if (!canPurchase.value || !product.value || !selectedStock.value) {
+async function addToCart() {
+  if (
+    !canPurchase.value ||
+    !product.value ||
+    !selectedStock.value
+  ) {
     return
   }
 
-  console.log('Pending cart integration:', {
-    product_id: product.value.product_id,
-    measure_id: selectedStock.value.measure_id,
-    quantity: quantity.value,
-    unit_price: selectedStock.value.price
-  })
+  cartError.value = ''
+  addedToCart.value = false
+
+  try {
+    await addItem({
+      product_id: product.value.product_id,
+      measure_id: selectedStock.value.measure_id,
+      quantity: quantity.value
+    })
+
+    addedToCart.value = true
+
+    window.setTimeout(() => {
+      addedToCart.value = false
+    }, 1800)
+  } catch {
+    cartError.value =
+      'No fue posible agregar el producto al carrito.'
+  }
 }
 
 useHead(() => ({

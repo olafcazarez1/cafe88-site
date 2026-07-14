@@ -10,6 +10,8 @@ export default defineNuxtConfig({
     erpBaseUrl: process.env.ERP_BASE_URL || 'http://erp.cafe88.org',
     erpApiToken: process.env.ERP_API_TOKEN || '',
     erpWarehouseId: process.env.ERP_WAREHOUSE_ID || '',
+    erpBranchId: process.env.ERP_BRANCH_ID || '',
+    erpClientId: process.env.ERP_CLIENT_ID || '',
 
     public: {
       siteName: 'Cafe88'

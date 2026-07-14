@@ -23,7 +23,7 @@ export default defineEventHandler(async (event) => {
 
         const response = await fetch(imageUrl, {
             headers: {
-                Authorization: `Bearer ${config.erpApiToken}`
+                Authorization: String(config.erpApiToken)
             }
         })
 

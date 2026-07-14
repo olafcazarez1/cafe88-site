@@ -2,34 +2,18 @@
   <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
     <div class="container">
 
-      <NuxtLink
-        class="navbar-brand d-flex align-items-center"
-        to="/"
-      >
-        <img
-        src="/images/logo.jpeg"
-        alt="Cafe88"
-        height="42"
-        class="me-3 navbar-logo"
-        />
+      <NuxtLink class="navbar-brand d-flex align-items-center" to="/">
+        <img src="/images/logo.jpeg" alt="Cafe88" height="42" class="me-3 navbar-logo" />
         <span class="fw-bold">
           Cafe88
         </span>
       </NuxtLink>
 
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarMain"
-      >
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain">
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <div
-        id="navbarMain"
-        class="collapse navbar-collapse"
-      >
+      <div id="navbarMain" class="collapse navbar-collapse">
         <ul class="navbar-nav ms-auto">
 
           <li class="nav-item">
@@ -44,9 +28,32 @@
             </NuxtLink>
           </li>
 
+          <NuxtLink to="/cart" class="nav-link cart-nav-link">
+            Carrito
+
+            <span v-if="itemCount > 0" class="cart-count">
+              {{ itemCount > 99 ? '99+' : itemCount }}
+            </span>
+          </NuxtLink>
+
         </ul>
       </div>
 
     </div>
   </nav>
 </template>
+
+<script setup lang="ts">
+const {
+  itemCount,
+  loadCart
+} = useCart()
+
+onMounted(async () => {
+  try {
+    await loadCart()
+  } catch {
+    // No cart yet is fine.
+  }
+})
+</script>

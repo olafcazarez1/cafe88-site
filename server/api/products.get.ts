@@ -143,7 +143,10 @@ export default defineEventHandler(async (): Promise<ProductsResponse> => {
           : '/images/products/product-placeholder.jpg',
 
         taxes: product.taxes ?? [],
-        stock: product.stock ?? []
+        stock: (product.stock ?? []).map(stockItem => ({
+          ...stockItem,
+          quantity: 99
+        }))
       }))
 
     return {

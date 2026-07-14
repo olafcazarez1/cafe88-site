@@ -107,7 +107,7 @@ export default defineEventHandler(async (event) => {
                 baseURL: config.erpBaseUrl,
 
                 headers: {
-                    Authorization: `Bearer ${config.erpApiToken}`
+                    Authorization: String(config.erpApiToken)
                 }
             }
         )
@@ -150,7 +150,10 @@ export default defineEventHandler(async (event) => {
                 : '/images/products/product-placeholder.jpg',
 
             taxes: product.taxes ?? [],
-            stock: product.stock ?? []
+            stock: (product.stock ?? []).map(stockItem => ({
+                ...stockItem,
+                quantity: 99
+            }))
         }
     } catch (error: unknown) {
         const fetchError = error as {
