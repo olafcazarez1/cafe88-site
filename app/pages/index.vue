@@ -119,7 +119,7 @@
           </span>
 
           <h2 class="fw-bold display-5 mt-2 mb-4">
-            Nuestra diferencia
+            Del origen a tu taza
           </h2>
 
           <p class="lead mb-4">
