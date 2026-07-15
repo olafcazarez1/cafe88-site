@@ -340,7 +340,11 @@
                                     </label>
 
                                     <input id="delivery-phone" v-model.trim="deliveryAddress.phone" type="tel"
-                                        class="form-control" autocomplete="tel" required>
+                                        class="form-control" inputmode="numeric" autocomplete="tel-national"
+                                        maxlength="10" required @input="onPhoneInput" />
+                                    <div class="form-text">
+                                        Ingresa un teléfono móvil de 10 dígitos (sin +52).
+                                    </div>
                                 </div>
 
                                 <!-- Street and numbers -->
@@ -876,7 +880,7 @@ function restorePaymentMethod() {
     }
 }
 
-function continueCheckout() {
+async function continueCheckout() {
     checkoutError.value = ''
 
     if (!cart.value || cart.value.items.length === 0) {
@@ -897,15 +901,30 @@ function continueCheckout() {
         return
     }
 
-    console.log('Checkout ready:', {
-        cart_id: cart.value.cart_id,
-        address: { ...deliveryAddress },
-        payment_method: paymentMethod.value,
-        shipping_cost: shippingCost.value,
-        total: grandTotal.value
-    })
+    localStorage.setItem(
+        'cafe88_checkout_summary',
+        JSON.stringify({
+            address: {
+                ...deliveryAddress
+            },
+            payment_method: paymentMethod.value,
+            shipping_cost: shippingCost.value,
+            total: grandTotal.value
+        })
+    )
 
-    // Tomorrow this will call the checkout/payment endpoint.
+    await navigateTo('/checkout/review')
+}
+
+function onPhoneInput(event: Event) {
+    const input = event.target as HTMLInputElement
+
+    const value = input.value
+        .replace(/\D/g, '')   // Remove everything except digits
+        .slice(0, 10)         // Maximum 10 digits
+
+    input.value = value
+    deliveryAddress.phone = value
 }
 
 </script>

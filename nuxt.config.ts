@@ -13,8 +13,13 @@ export default defineNuxtConfig({
     erpBranchId: process.env.ERP_BRANCH_ID || '',
     erpClientId: process.env.ERP_CLIENT_ID || '',
 
+    paypalEnvironment: process.env.PAYPAL_ENVIRONMENT || 'sandbox',
+    paypalClientId: process.env.PAYPAL_CLIENT_ID || '',
+    paypalClientSecret: process.env.PAYPAL_CLIENT_SECRET || '',
+
     public: {
-      siteName: 'Cafe88'
+      siteName: 'Cafe88',
+      paypalClientId: process.env.PAYPAL_CLIENT_ID || ''
     }
   },
 

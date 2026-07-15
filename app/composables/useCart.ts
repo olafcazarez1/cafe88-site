@@ -190,6 +190,11 @@ export function useCart() {
         }
     }
 
+    function resetCartState() {
+        cart.value = null
+        errorMessage.value = null
+    }
+
     return {
         cart,
         pending,
@@ -202,6 +207,9 @@ export function useCart() {
         addItem,
         updateItem,
         removeItem,
-        clearCart
+        clearCart,
+        resetCartState
     }
+
+
 }
