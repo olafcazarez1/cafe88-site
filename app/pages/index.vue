@@ -106,39 +106,68 @@
     <!-- Difference -->
     <section class="difference-section-dark rounded-4 p-5 mb-5">
 
-      <div class="row align-items-center">
+      <div class="row align-items-center g-5">
 
-        <div class="col-md-6 mb-4 mb-md-0">
-          <img src="/images/products/cafe88-bags.jpg" alt="Cafe88 productos" class="img-fluid rounded-4 shadow-lg">
+        <div class="col-lg-6">
+          <img src="/images/products/cafe88-and-mug.jpg" alt="Café88 Orgánico" class="img-fluid rounded-4 shadow-lg">
         </div>
 
-        <div class="col-md-6">
-          <h2 class="fw-bold mb-3">
+        <div class="col-lg-6">
+
+          <span class="difference-eyebrow">
+            DESDE LAS MONTAÑAS DE VERACRUZ
+          </span>
+
+          <h2 class="fw-bold display-5 mt-2 mb-4">
             Nuestra diferencia
           </h2>
 
-          <p class="fs-5">
-            Café 88 es un café orgánico de especialidad cultivado
-            entre los 1400 y 1500 msnm en las montañas de Veracruz,
-            reconocido por su calidad, dulzura y atributos en taza.
+          <p class="lead mb-4">
+            <strong>Café88</strong> nace en las montañas de Veracruz,
+            donde cada grano se cultiva entre
+            <strong>1,400 y 1,500 msnm</strong>,
+            logrando un perfil de taza con dulzura natural,
+            acidez balanceada y notas únicas.
           </p>
 
-          <p>
-            Finalista del “Premio a la Cosecha 2009”, finalista de
-            “Excellence Cup 2012” y del “2º Premio CAFECOL 2012”,
-            además de recibir menciones honoríficas por su dulzura,
-            acidez y perfil sensorial.
+          <p class="mb-4">
+            Nuestro café ha sido reconocido como finalista del
+            <strong>Premio a la Cosecha 2009</strong>,
+            <strong>Excellence Cup 2012</strong>
+            y del
+            <strong>2.º Premio CAFECOL 2012</strong>,
+            reflejando el compromiso de nuestros productores con la calidad.
           </p>
 
-          <ul class="list-unstyled mt-4">
-            <li class="mb-2">☕ Café de especialidad</li>
-            <li class="mb-2">⛰️ Cultivado a 1400–1500 msnm</li>
-            <li class="mb-2">🏆 Reconocimientos nacionales</li>
-          </ul>
+          <div class="row g-3 mb-4">
 
-          <NuxtLink to="/products" class="btn btn-light mt-3">
-            Ver productos
+            <div class="col-12">
+              ☕ <strong>Café de especialidad</strong><br>
+              <small class="text-light opacity-75">
+                Selección artesanal de granos.
+              </small>
+            </div>
+
+            <div class="col-12">
+              🌱 <strong>Producción orgánica</strong><br>
+              <small class="text-light opacity-75">
+                Cultivado de forma responsable.
+              </small>
+            </div>
+
+            <div class="col-12">
+              🏆 <strong>Reconocimiento internacional</strong><br>
+              <small class="text-light opacity-75">
+                Premiado por su calidad y perfil sensorial.
+              </small>
+            </div>
+
+          </div>
+
+          <NuxtLink to="/products" class="btn btn-light btn-lg px-4">
+            Descubrir nuestros productos
           </NuxtLink>
+
         </div>
 
       </div>
@@ -333,9 +362,9 @@ const featuredProducts = [
   },
   {
     id: 2,
-    name: 'Jalea de Café',
+    name: 'Cafeta',
     description: 'Producto gourmet artesanal.',
-    image: '/images/products/jalea-cafe.jpg'
+    image: '/images/products/cajeta-cafe.jpg'
   },
   {
     id: 3,

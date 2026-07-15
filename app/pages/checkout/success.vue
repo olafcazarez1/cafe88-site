@@ -86,6 +86,32 @@
             al correo electrónico registrado.
         </p>
 
+        <div class="success-support-notice">
+            <div class="success-support-icon">
+                <i class="bi bi-envelope-exclamation" aria-hidden="true" />
+            </div>
+
+            <div>
+                <strong>
+                    Revisa también tu carpeta de correo no deseado
+                </strong>
+
+                <p class="mb-2">
+                    Enviamos la confirmación de tu pedido al correo registrado.
+                    Si no la encuentras en tu bandeja de entrada, revisa las carpetas
+                    de spam o promociones.
+                </p>
+
+                <p class="mb-0">
+                    Para dudas o aclaraciones, escríbenos por WhatsApp al
+
+                    <a :href="whatsappSupportUrl" target="_blank" rel="noopener noreferrer">
+                        <strong>229 906 3799</strong>
+                    </a>
+                </p>
+            </div>
+        </div>
+
         <NuxtLink to="/products" class="btn btn-cafe88 mt-2">
             Seguir comprando
         </NuxtLink>
@@ -114,6 +140,17 @@ type CompletedCheckout = {
         already_processed: boolean
     }
 }
+
+const whatsappSupportUrl = computed(() => {
+    const orderCode =
+        checkout.value?.sales_document.code ?? ''
+
+    const message = orderCode
+        ? `Hola Café88, tengo una duda sobre mi pedido ${orderCode}.`
+        : 'Hola Café88, tengo una duda sobre mi pedido.'
+
+    return `https://wa.me/522299063799?text=${encodeURIComponent(message)}`
+})
 
 const checkout = ref<CompletedCheckout | null>(null)
 

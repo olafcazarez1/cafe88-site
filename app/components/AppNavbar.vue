@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+  <nav class="navbar navbar-expand-lg navbar-dark navbar-custom sticky-top">
     <div class="container">
 
       <NuxtLink class="navbar-brand d-flex align-items-center" to="/">
@@ -24,7 +24,7 @@
 
           <li class="nav-item">
             <NuxtLink class="nav-link" to="/products">
-              Productos
+              Tienda
             </NuxtLink>
           </li>
 
