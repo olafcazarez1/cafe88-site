@@ -183,17 +183,14 @@
                                         Number(($event.target as HTMLInputElement).value)
                                     )">
 
-                                <button type="button" class="btn btn-link text-danger p-0"
+                                <button type="button" class="btn btn-link text-danger p-0 cart-remove"
                                     :disabled="removingItemId === item.cart_item_id"
-                                    @click.stop="handleRemoveItem(item.cart_item_id)">
+                                    :aria-label="`Eliminar ${item.product?.short_name || item.product?.name || 'producto'}`"
+                                    title="Eliminar producto" @click.stop="handleRemoveItem(item.cart_item_id)">
                                     <span v-if="removingItemId === item.cart_item_id"
-                                        class="spinner-border spinner-border-sm me-1" aria-hidden="true" />
+                                        class="spinner-border spinner-border-sm" aria-hidden="true" />
 
-                                    {{
-                                        removingItemId === item.cart_item_id
-                                            ? 'Eliminando...'
-                                            : 'Eliminar'
-                                    }}
+                                    <i v-else class="bi bi-trash-fill fs-5" aria-hidden="true" />
                                 </button>
                                 <div v-if="cartActionError" class="alert alert-danger">
                                     {{ cartActionError }}

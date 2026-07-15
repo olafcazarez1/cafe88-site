@@ -14,8 +14,8 @@
             Tradición, aroma y pasión en cada taza.
           </p>
 
-          <div class="mt-4">
-            <NuxtLink to="/products" class="btn btn-cafe88 btn-lg me-2">
+          <div class="d-grid gap-2 mt-4 hero-actions-mobile">
+            <NuxtLink to="/products" class="btn btn-cafe88 btn-lg">
               Ver Productos
             </NuxtLink>
 

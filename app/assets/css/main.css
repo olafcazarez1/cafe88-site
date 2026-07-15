@@ -1475,3 +1475,167 @@ body {
     height: 260px;
   }
 }
+
+@media (max-width: 575.98px) {
+  body {
+    font-size: 0.95rem;
+  }
+
+  .container {
+    padding-right: 0.85rem;
+    padding-left: 0.85rem;
+  }
+
+  .hero-title {
+    font-size: 2rem;
+    line-height: 1.05;
+  }
+
+  .product-detail-layout,
+  .checkout-section-card,
+  .checkout-review-card,
+  .cart-summary-card {
+    padding: 1rem;
+    border-radius: 14px;
+  }
+
+  .product-detail-image-box {
+    height: 285px;
+  }
+
+  .product-detail-title {
+    font-size: 1.55rem;
+  }
+
+  .checkout-review-item {
+    gap: 0.7rem;
+  }
+
+  .checkout-review-image {
+    width: 64px;
+    height: 64px;
+    flex-basis: 64px;
+  }
+
+  .checkout-success-card {
+    margin: 0.75rem auto;
+    padding: 0.85rem;
+  }
+
+  .checkout-summary {
+    margin: 1rem auto;
+    padding: 1rem;
+  }
+
+  .success-sticker {
+    width: 92px;
+    height: 92px;
+  }
+
+  .success-hero h1 {
+    font-size: 1.65rem;
+  }
+
+  .order-code {
+    font-size: 1.05rem;
+    overflow-wrap: anywhere;
+  }
+
+  .whatsapp-support-button {
+    right: 0.75rem;
+    bottom: 0.75rem;
+  }
+}
+
+.cart-nav-mobile {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.cart-nav-mobile:hover,
+.cart-nav-mobile:focus {
+  color: #fff;
+}
+
+.cart-nav-mobile i {
+  font-size: 1.35rem;
+  line-height: 1;
+}
+
+.cart-nav-mobile .cart-count {
+  position: absolute;
+  top: 0.1rem;
+  right: -0.15rem;
+  min-width: 1.15rem;
+  height: 1.15rem;
+  padding: 0 0.25rem;
+  font-size: 0.62rem;
+  line-height: 1.15rem;
+}
+
+@media (min-width: 992px) {
+  .cart-nav-mobile {
+    display: none;
+  }
+}
+
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.hero-actions .btn {
+    min-width: 170px;
+}
+
+.hero-actions-mobile {
+  width: fit-content;
+}
+
+.hero-actions-mobile .btn {
+  min-width: 150px;
+}
+
+@media (max-width: 767px) {
+    .hero-actions {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .hero-actions .btn {
+        width: 170px;
+    }
+}
+
+.cart-remove {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    text-decoration: none;
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.cart-remove:hover:not(:disabled),
+.cart-remove:focus-visible:not(:disabled) {
+    background-color: rgba(220, 53, 69, 0.1);
+    color: #b02a37 !important;
+    transform: scale(1.08);
+}
+
+.cart-remove:disabled {
+    cursor: wait;
+    opacity: 0.6;
+}
