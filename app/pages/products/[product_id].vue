@@ -162,7 +162,8 @@
                 {{ cartError }}
               </div>
 
-              <button type="button" class="btn btn-outline-dark w-100" :disabled="!canPurchase">
+              <button type="button" class="btn btn-outline-dark w-100" :disabled="!canPurchase || cartPending"
+                @click="buyNow">
                 Comprar ahora
               </button>
 
@@ -313,12 +314,16 @@ const formattedPrice = computed(() => {
   }).format(selectedStock.value?.price ?? 0)
 })
 
+async function addCurrentProductToCart() {
+  await addItem({
+    product_id: product.value!.product_id,
+    measure_id: selectedStock.value!.measure_id,
+    quantity: quantity.value
+  })
+}
+
 async function addToCart() {
-  if (
-    !canPurchase.value ||
-    !product.value ||
-    !selectedStock.value
-  ) {
+  if (!canPurchase.value || !product.value || !selectedStock.value) {
     return
   }
 
@@ -326,17 +331,30 @@ async function addToCart() {
   addedToCart.value = false
 
   try {
-    await addItem({
-      product_id: product.value.product_id,
-      measure_id: selectedStock.value.measure_id,
-      quantity: quantity.value
-    })
+    await addCurrentProductToCart()
 
     addedToCart.value = true
 
     window.setTimeout(() => {
       addedToCart.value = false
     }, 1800)
+  } catch {
+    cartError.value =
+      'No fue posible agregar el producto al carrito.'
+  }
+}
+
+async function buyNow() {
+  if (!canPurchase.value || !product.value || !selectedStock.value) {
+    return
+  }
+
+  cartError.value = ''
+
+  try {
+    await addCurrentProductToCart()
+
+    await navigateTo('/cart')
   } catch {
     cartError.value =
       'No fue posible agregar el producto al carrito.'
