@@ -7,6 +7,8 @@ import {
     type MercadoPagoPayment
 } from './mercado-pago'
 
+import { mapDeliveryAddress } from './delivery-address'
+
 export type DeliveryAddress = {
     name: string
     email: string
@@ -122,8 +124,7 @@ export async function processMercadoPagoCheckout(
         })
     }
 
-    let resolvedAddress =
-        deliveryAddress
+    let resolvedAddress = deliveryAddress
 
     /*
      * A webhook does not have browser localStorage or the original
@@ -215,7 +216,7 @@ export async function processMercadoPagoCheckout(
                         'G03',
 
                     delivery_address:
-                        resolvedAddress
+                        mapDeliveryAddress(resolvedAddress)
                 }
             }
         )
