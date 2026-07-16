@@ -504,7 +504,10 @@ async function startMercadoPagoCheckout() {
                                 item.product.short_name,
                             quantity: item.quantity,
                             price: item.unit_price
-                        }))
+                        })),
+
+                        delivery_address:
+                            checkoutSummary.value.address,
                     }
                 }
             )

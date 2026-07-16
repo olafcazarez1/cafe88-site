@@ -19,6 +19,7 @@ export default defineNuxtConfig({
     paypalClientSecret: process.env.PAYPAL_CLIENT_SECRET || '',
 
     mercadoPagoAccessToken: process.env.MERCADO_PAGO_ACCESS_TOKEN || '',
+    mercadoPagoWebhookSecret: process.env.MERCADO_PAGO_WEBHOOK_SECRET || '',
     mercadoPagoBaseUrl: process.env.MERCADO_PAGO_BASE_URL || '',
 
     public: {

@@ -12,12 +12,16 @@ type PreferenceCartItem = {
 
 type PreferenceRequest = {
     cart_id: string
-    items: PreferenceCartItem[]
     shipping: number
+
     payer: {
         name: string
         email: string
     }
+
+    delivery_address: DeliveryAddress
+
+    items: PreferenceCartItem[]
 }
 
 export default defineEventHandler(async (event) => {
@@ -39,6 +43,25 @@ export default defineEventHandler(async (event) => {
                 'Cart and items are required'
         })
     }
+
+    await erpFetch(
+        event,
+        '/api/shopping-cart/checkout-intent',
+        {
+            method: 'POST',
+
+            body: {
+                cart_id:
+                    body.cart_id,
+
+                provider:
+                    'mercado_pago',
+
+                delivery_address:
+                    body.delivery_address
+            }
+        }
+    )
 
     const client = new MercadoPagoConfig({
         accessToken: config.mercadoPagoAccessToken
@@ -86,7 +109,9 @@ export default defineEventHandler(async (event) => {
                     pending:
                         `${baseUrl}/checkout/mercado-pago/pending`,
                     failure:
-                        `${baseUrl}/checkout/mercado-pago/failure`
+                        `${baseUrl}/checkout/mercado-pago/failure`,
+                    notification_url:
+                        `${baseUrl}/api/mercado-pago/webhook`,
                 },
 
                 auto_return: 'approved',
@@ -98,6 +123,24 @@ export default defineEventHandler(async (event) => {
                 statement_descriptor: 'CAFE88'
             }
         })
+
+        await erpFetch(
+            event,
+            `/api/shopping-cart/checkout-intent/${encodeURIComponent(
+                body.cart_id
+            )}`,
+            {
+                method: 'PATCH',
+
+                body: {
+                    provider_reference:
+                        response.id,
+
+                    status:
+                        'pending'
+                }
+            }
+        )
 
         return {
             preference_id: response.id,
