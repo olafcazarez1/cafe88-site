@@ -89,7 +89,7 @@ export default defineEventHandler(async (event) => {
                         `${baseUrl}/checkout/mercado-pago/failure`
                 },
 
-                // auto_return: 'approved',
+                auto_return: 'approved',
 
                 metadata: {
                     cart_id: body.cart_id
