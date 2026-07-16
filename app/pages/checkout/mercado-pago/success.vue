@@ -189,6 +189,8 @@ async function completeCheckout() {
         localStorage.setItem(
             'cafe88_completed_payment',
             JSON.stringify({
+                provider: 'mercado_pago',
+
                 transaction_id:
                     completedCheckout.payment.transaction_id,
 

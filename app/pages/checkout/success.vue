@@ -60,7 +60,10 @@
 
             <div class="summary-row">
                 <span>Método</span>
-                <strong>PayPal</strong>
+
+                <strong>
+                    {{ paymentProvider }}
+                </strong>
             </div>
 
             <div class="summary-row">
@@ -72,7 +75,9 @@
             </div>
 
             <div v-if="checkout.payment.payer_email" class="summary-row">
-                <span>Cuenta PayPal</span>
+                <span>
+                    {{ paymentAccountLabel }}
+                </span>
 
                 <strong>
                     {{ checkout.payment.payer_email }}
@@ -121,11 +126,15 @@
 <script setup lang="ts">
 type CompletedCheckout = {
     payment: {
-        paypal_order_id: string
+        provider: string
+
+        provider_order_id: string
         transaction_id: string
         transaction_status: string
+
         amount: string
         currency: string
+
         payer_email: string | null
     }
 
@@ -153,6 +162,25 @@ const whatsappSupportUrl = computed(() => {
 })
 
 const checkout = ref<CompletedCheckout | null>(null)
+
+const paymentProvider = computed(() => {
+    switch (checkout.value?.payment.provider) {
+        case 'mercado_pago':
+            return 'Mercado Pago'
+
+        case 'paypal':
+            return 'PayPal'
+
+        default:
+            return checkout.value?.payment.provider ?? 'Pago en línea'
+    }
+})
+
+const paymentAccountLabel = computed(() => {
+    return checkout.value?.payment.provider === 'mercado_pago'
+        ? 'Cuenta Mercado Pago'
+        : 'Cuenta PayPal'
+})
 
 onMounted(() => {
     const storedCheckout = localStorage.getItem(

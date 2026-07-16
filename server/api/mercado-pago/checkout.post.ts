@@ -1,3 +1,4 @@
+import { mapDeliveryAddress } from '../../utils/delivery-address'
 import { erpFetch } from '../../utils/erp'
 
 type DeliveryAddress = {
@@ -223,8 +224,7 @@ export default defineEventHandler(async (event) => {
                     fiscal_use:
                         'G03',
 
-                    delivery_address:
-                        body.delivery_address
+                    delivery_address: mapDeliveryAddress(body.delivery_address)
                 }
             }
         )

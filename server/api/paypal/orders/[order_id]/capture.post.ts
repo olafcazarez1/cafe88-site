@@ -179,7 +179,7 @@ export default defineEventHandler(async (event) => {
 
     return {
         payment: {
-            paypal_order_id: capture.id,
+            provider_order_id: capture.id,
 
             status: capture.status,
 

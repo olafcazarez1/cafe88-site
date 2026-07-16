@@ -288,7 +288,7 @@
                         {{
                             mercadoPagoPending
                                 ? 'Abriendo Mercado Pago...'
-                        : 'Pagar con Mercado Pago'
+                                : 'Pagar con Mercado Pago'
                         }}
                     </button>
 
@@ -324,7 +324,7 @@ type CheckoutSummary = {
 }
 
 type PayPalCompletedPayment = {
-    paypal_order_id: string
+    provider_order_id: string
     status: string
     transaction_id: string | null
     transaction_status: string | null
@@ -345,7 +345,7 @@ const mercadoPagoError = ref<string | null>(null)
 
 type CompletedCheckout = {
     payment: {
-        paypal_order_id: string
+        provider_order_id: string
         status: string
         transaction_id: string
         transaction_status: string
