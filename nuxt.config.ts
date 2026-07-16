@@ -18,9 +18,23 @@ export default defineNuxtConfig({
     paypalClientId: process.env.PAYPAL_CLIENT_ID || '',
     paypalClientSecret: process.env.PAYPAL_CLIENT_SECRET || '',
 
+    mercadoPagoAccessToken: process.env.MERCADO_PAGO_ACCESS_TOKEN || '',
+    mercadoPagoBaseUrl: process.env.MERCADO_PAGO_BASE_URL || '',
+
     public: {
       siteName: 'Cafe88',
-      paypalClientId: process.env.PAYPAL_CLIENT_ID || ''
+      paypalClientId: process.env.PAYPAL_CLIENT_ID || '',
+      mercadoPagoPublicKey: process.env.MERCADO_PAGO_PUBLIC_KEY || '',
+    }
+  },
+
+  build: {
+    transpile: ['mercadopago']
+  },
+
+  nitro: {
+    externals: {
+      inline: ['mercadopago']
     }
   },
 

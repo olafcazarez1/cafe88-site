@@ -1639,3 +1639,69 @@ body {
     cursor: wait;
     opacity: 0.6;
 }
+
+.checkout-payment-result {
+  max-width: 620px;
+  padding: 2rem;
+  border: 1px solid var(--cafe88-border);
+  border-radius: 22px;
+  background-color: var(--cafe88-surface);
+  box-shadow: var(--cafe88-shadow-md);
+}
+
+.payment-result-icon {
+  display: inline-flex;
+  width: 4rem;
+  height: 4rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 1.7rem;
+}
+
+.payment-result-icon.is-success {
+  background-color: #dff3e6;
+  color: #16763a;
+}
+
+.payment-result-icon.is-pending {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.payment-result-icon.is-error {
+  background-color: #f8d7da;
+  color: #b02a37;
+}
+
+.payment-result-details {
+  padding: 1.25rem;
+  border: 1px solid var(--cafe88-border);
+  border-radius: 16px;
+  background-color: var(--cafe88-soft);
+  text-align: left;
+}
+
+.payment-result-details .summary-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.65rem 0;
+}
+
+.payment-result-details .summary-row + .summary-row {
+  border-top: 1px solid var(--cafe88-border);
+}
+
+@media (max-width: 575.98px) {
+  .checkout-payment-result {
+    padding: 1.25rem;
+    border-radius: 16px;
+  }
+
+  .payment-result-details .summary-row {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+}

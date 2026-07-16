@@ -281,9 +281,20 @@
 
                     <button v-else-if="
                         checkoutSummary?.payment_method === 'mercado_pago'
-                    " type="button" class="btn btn-cafe88 btn-lg w-100 mt-4" disabled>
-                        Mercado Pago próximamente
+                    " type="button" class="btn btn-cafe88 btn-lg w-100 mt-4" :disabled="mercadoPagoPending"
+                        @click="startMercadoPagoCheckout">
+                        <span v-if="mercadoPagoPending" class="spinner-border spinner-border-sm me-2" />
+
+                        {{
+                            mercadoPagoPending
+                                ? 'Abriendo Mercado Pago...'
+                        : 'Pagar con Mercado Pago'
+                        }}
                     </button>
+
+                    <div v-if="mercadoPagoError" class="alert alert-danger mt-3">
+                        {{ mercadoPagoError }}
+                    </div>
                 </aside>
             </div>
         </div>
@@ -322,6 +333,15 @@ type PayPalCompletedPayment = {
     payer_email: string | null
     payer_name: string
 }
+
+type MercadoPagoPreferenceResponse = {
+    preference_id: string
+    init_point: string
+    sandbox_init_point: string
+}
+
+const mercadoPagoPending = ref(false)
+const mercadoPagoError = ref<string | null>(null)
 
 type CompletedCheckout = {
     payment: {
@@ -439,6 +459,73 @@ async function handlePayPalCompleted(
     resetCartState()
 
     await navigateTo('/checkout/success')
+}
+
+async function startMercadoPagoCheckout() {
+    if (
+        mercadoPagoPending.value ||
+        !cart.value
+    ) {
+        return
+    }
+
+    mercadoPagoPending.value = true
+    mercadoPagoError.value = null
+
+    try {
+        localStorage.setItem(
+            'cafe88_checkout_summary',
+            JSON.stringify(checkoutSummary.value)
+        )
+
+        const response =
+            await $fetch<MercadoPagoPreferenceResponse>(
+                '/api/mercado-pago/preference',
+                {
+                    method: 'POST',
+
+                    body: {
+                        cart_id: cart.value.cart_id,
+
+                        shipping:
+                            checkoutSummary.value.shipping_cost,
+
+                        payer: {
+                            name:
+                                checkoutSummary.value.address.name,
+
+                            email:
+                                checkoutSummary.value.address.email
+                        },
+
+                        items: cart.value.items.map(item => ({
+                            product_id: item.product_id,
+                            name:
+                                item.product.short_name,
+                            quantity: item.quantity,
+                            price: item.unit_price
+                        }))
+                    }
+                }
+            )
+
+        window.location.href =
+            import.meta.dev
+                ? response.sandbox_init_point
+                : response.init_point
+
+    } catch (error) {
+
+        console.error(error)
+
+        mercadoPagoError.value =
+            'No fue posible iniciar Mercado Pago.'
+
+    } finally {
+
+        mercadoPagoPending.value = false
+
+    }
 }
 
 useHead({
