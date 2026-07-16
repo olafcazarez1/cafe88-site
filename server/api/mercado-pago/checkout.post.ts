@@ -253,6 +253,10 @@ export default defineEventHandler(async (event) => {
 
     return {
         payment: {
+            provider: 'mercado_pago',
+
+            provider_order_id: cartId,
+
             mercado_pago_payment_id:
                 String(payment.id),
 
