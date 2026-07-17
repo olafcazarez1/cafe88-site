@@ -103,6 +103,9 @@ export default defineEventHandler(async (event) => {
 
                 external_reference: body.cart_id,
 
+                notification_url:
+                    `${baseUrl}/api/mercado-pago/webhook`,
+
                 back_urls: {
                     success:
                         `${baseUrl}/checkout/mercado-pago/success`,
@@ -110,8 +113,6 @@ export default defineEventHandler(async (event) => {
                         `${baseUrl}/checkout/mercado-pago/pending`,
                     failure:
                         `${baseUrl}/checkout/mercado-pago/failure`,
-                    notification_url:
-                        `${baseUrl}/api/mercado-pago/webhook`,
                 },
 
                 auto_return: 'approved',
