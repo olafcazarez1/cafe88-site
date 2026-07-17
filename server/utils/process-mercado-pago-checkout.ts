@@ -124,6 +124,14 @@ export async function processMercadoPagoCheckout(
         })
     }
 
+    await updateCheckoutIntent(
+        event,
+        cartId,
+        {
+            status: 'processing'
+        }
+    )
+
     let resolvedAddress = deliveryAddress
 
     /*
@@ -316,4 +324,25 @@ async function markCheckoutIntentCompleted(
             error
         )
     }
+}
+
+async function updateCheckoutIntent(
+    event: H3Event,
+    cartId: string,
+    body: {
+        status?: 'pending' | 'processing' | 'completed' | 'failed'
+        provider_reference?: string
+        document_id?: string
+    }
+): Promise<void> {
+    await erpFetch(
+        event,
+        `/api/shopping-cart/checkout-intent/${encodeURIComponent(
+            cartId
+        )}`,
+        {
+            method: 'PATCH',
+            body
+        }
+    )
 }

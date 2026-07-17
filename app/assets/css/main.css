@@ -1340,7 +1340,7 @@ body {
 
 
 .catalog-toolbar {
-  max-width: 760px;
+  width: 100%;
 }
 
 .products-search-field {
@@ -1423,9 +1423,6 @@ body {
 
 /* Product catalog search */
 
-.catalog-toolbar {
-  max-width: 760px;
-}
 
 .catalog-toolbar .products-search-field {
   width: 100%;
@@ -1704,4 +1701,211 @@ body {
     flex-direction: column;
     gap: 0.25rem;
   }
+}
+
+/* --------------------------------------------------------------------------
+ * Products toolbar
+ * -------------------------------------------------------------------------- */
+
+.products-filter-group {
+  display: flex;
+  width: 100%;
+  gap: 0.75rem;
+}
+
+.products-search-field {
+  position: relative;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.products-search-field > .bi-search {
+  position: absolute;
+  top: 50%;
+  left: 1rem;
+  z-index: 5;
+  color: #6c757d;
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+.products-search-field .form-control {
+  height: 48px;
+  padding-left: 2.75rem;
+  padding-right: 2.75rem;
+  border: 1px solid #dee2e6;
+  border-radius: 0.5rem;
+  box-shadow: none;
+  transition:
+    border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
+}
+
+.products-search-field .form-control:hover {
+  border-color: #c8c8c8;
+}
+
+.products-search-field .form-control:focus {
+  border-color: var(--cafe88-red);
+  box-shadow: 0 0 0 0.2rem rgba(122, 0, 0, 0.15);
+}
+
+.products-search-clear {
+  position: absolute;
+  top: 50%;
+  right: 0.75rem;
+  z-index: 5;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem;
+  border: 0;
+  background: transparent;
+  color: #6c757d;
+  transform: translateY(-50%);
+}
+
+.products-search-clear:hover {
+  color: var(--cafe88-red);
+}
+
+
+/* --------------------------------------------------------------------------
+ * Desktop category select
+ * -------------------------------------------------------------------------- */
+
+.products-category-wrapper {
+  position: relative;
+  flex: 0 0 240px;
+  width: 240px;
+}
+
+.products-category-select {
+  width: 100%;
+  height: 48px;
+  padding-left: 1rem;
+  padding-right: 2.5rem;
+  border: 1px solid #dee2e6;
+  border-radius: 0.5rem;
+  background-color: #fff;
+  color: #212529;
+  font-size: 0.95rem;
+  font-weight: 500;
+  box-shadow: none;
+  transition:
+    border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
+}
+
+.products-category-select:hover {
+  border-color: #c8c8c8;
+}
+
+.products-category-select:focus {
+  border-color: var(--cafe88-red);
+  box-shadow: 0 0 0 0.2rem rgba(122, 0, 0, 0.15);
+}
+
+
+/* --------------------------------------------------------------------------
+ * Mobile category pills
+ * -------------------------------------------------------------------------- */
+
+.products-category-pills {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  padding-bottom: 0.25rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.products-category-pills::-webkit-scrollbar {
+  display: none;
+}
+
+.category-pill {
+  flex: 0 0 auto;
+  padding: 0.45rem 0.8rem;
+  border: 1px solid #d9d3ce;
+  border-radius: 999px;
+  background-color: #fff;
+  color: var(--cafe88-brown);
+  font-size: 0.78rem;
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+  transition:
+    border-color 0.15s ease-in-out,
+    background-color 0.15s ease-in-out,
+    color 0.15s ease-in-out;
+}
+
+.category-pill:hover {
+  border-color: var(--cafe88-red);
+  color: var(--cafe88-red);
+}
+
+.category-pill.active {
+  border-color: var(--cafe88-red);
+  background-color: var(--cafe88-red);
+  color: #fff;
+}
+
+
+/* --------------------------------------------------------------------------
+ * Filter summary
+ * -------------------------------------------------------------------------- */
+
+.catalog-filter-summary {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.catalog-clear-filters {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--cafe88-red);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.catalog-clear-filters:hover {
+  text-decoration: underline;
+}
+
+.catalog-result-count {
+  color: #6c757d;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+
+/* --------------------------------------------------------------------------
+ * Responsive
+ * -------------------------------------------------------------------------- */
+
+@media (max-width: 767.98px) {
+  .products-filter-group {
+    display: block;
+  }
+
+  .products-search-field {
+    width: 100%;
+  }
+
+  .catalog-filter-summary {
+    justify-content: space-between;
+  }
+}
+
+.products-search-field input[type="search"]::-webkit-search-decoration,
+.products-search-field input[type="search"]::-webkit-search-cancel-button,
+.products-search-field input[type="search"]::-webkit-search-results-button,
+.products-search-field input[type="search"]::-webkit-search-results-decoration {
+    -webkit-appearance: none;
+    appearance: none;
 }

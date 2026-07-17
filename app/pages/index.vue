@@ -90,7 +90,7 @@
                 {{ product.description }}
               </p>
 
-              <NuxtLink to="/products" class="btn btn-cafe88 btn-sm">
+              <NuxtLink :to="product.to" class="btn btn-cafe88 btn-sm">
                 Ver producto
               </NuxtLink>
 
@@ -358,19 +358,22 @@ const featuredProducts = [
     id: 1,
     name: 'Cafe88 Orgánico',
     description: 'Café veracruzano premium de altura.',
-    image: '/images/products/cafe88-black.jpg'
+    image: '/images/products/cafe88-black.jpg',
+    to: '/products?category=43f95e64-28be-4464-9f3b-9116b19e1b18'
   },
   {
     id: 2,
     name: 'Cafeta',
     description: 'Producto gourmet artesanal.',
-    image: '/images/products/cajeta-cafe.jpg'
+    image: '/images/products/cajeta-cafe.jpg',
+    to: '/products/168961f8-dddc-480f-b19d-495e9e3e4788'
   },
   {
     id: 3,
     name: 'Salsa de Café',
     description: 'Sabor gourmet inspirado en café.',
-    image: '/images/products/salsa-cafe.jpg'
+    image: '/images/products/salsa-cafe.jpg',
+    to: '/products/ba7e6704-34f2-49a3-beac-7cac89ec025f'
   }
 ]
 </script>
