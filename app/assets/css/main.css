@@ -1909,3 +1909,69 @@ body {
     -webkit-appearance: none;
     appearance: none;
 }
+
+/* Delivery address modal */
+
+#deliveryAddressModal .modal-content {
+    max-height: calc(100dvh - 2rem);
+    overflow: hidden;
+}
+
+#deliveryAddressModal .delivery-address-form {
+    display: flex;
+    flex: 1 1 auto;
+    min-height: 0;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+#deliveryAddressModal .modal-header,
+#deliveryAddressModal .modal-footer {
+    flex: 0 0 auto;
+    background-color: #fff;
+}
+
+#deliveryAddressModal .modal-body {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 575.98px) {
+    #deliveryAddressModal .modal-dialog {
+        width: 100%;
+        max-width: none;
+        height: 100%;
+        margin: 0;
+    }
+
+    #deliveryAddressModal .modal-content {
+        width: 100%;
+        height: 100dvh;
+        max-height: 100dvh;
+        border: 0;
+        border-radius: 0;
+    }
+
+    #deliveryAddressModal .modal-header {
+        padding: 0.9rem 1rem;
+    }
+
+    #deliveryAddressModal .modal-body {
+        padding: 1rem;
+    }
+
+    #deliveryAddressModal .modal-footer {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.75rem;
+        padding: 0.75rem 1rem;
+    }
+
+    #deliveryAddressModal .modal-footer .btn {
+        width: 100%;
+        margin: 0;
+    }
+}

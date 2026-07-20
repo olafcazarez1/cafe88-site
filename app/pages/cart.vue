@@ -296,7 +296,7 @@
         </div>
         <div id="deliveryAddressModal" class="modal fade" tabindex="-1" aria-labelledby="deliveryAddressModalLabel"
             aria-hidden="true">
-            <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable modal-fullscreen-sm-down">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h2 id="deliveryAddressModalLabel" class="modal-title fs-5">
@@ -307,7 +307,7 @@
                             aria-label="Cerrar" />
                     </div>
 
-                    <form @submit.prevent="saveDeliveryAddress">
+                    <form class="delivery-address-form" @submit.prevent="saveDeliveryAddress">
                         <div class="modal-body">
                             <div class="row g-3">
 
