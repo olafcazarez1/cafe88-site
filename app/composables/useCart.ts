@@ -2,7 +2,6 @@ import type {
     AddCartItemPayload,
     ShoppingCart
 } from '~/types/cart'
-import type { FetchError } from 'ofetch'
 
 export function useCart() {
     const config = useRuntimeConfig()
@@ -50,14 +49,7 @@ export function useCart() {
         }
     }
 
-    async function resetCartToken() {
-        const cartToken = useCookie<string | null>('cart_token')
-
-        cartToken.value = null
-        cart.value = null
-    }
-
-    async function createCart(retry = true) {
+    async function createCart() {
         pending.value = true
         errorMessage.value = null
 
@@ -71,22 +63,7 @@ export function useCart() {
 
             return cart.value
         } catch (error) {
-            const fetchError = error as FetchError
-
-            if (fetchError.statusCode === 409 && retry) {
-                await resetCartToken()
-
-                /*
-                 * The next POST must generate and store a new token.
-                 * Retry only once to avoid an infinite loop.
-                 */
-                return await createCart(false)
-            }
-
-            errorMessage.value =
-                fetchError.statusCode === 409
-                    ? 'No fue posible renovar el carrito.'
-                    : 'No fue posible crear el carrito.'
+            errorMessage.value = 'No fue posible crear el carrito.'
 
             throw error
         } finally {
