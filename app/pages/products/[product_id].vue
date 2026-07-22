@@ -179,6 +179,84 @@
 
       </section>
 
+      <div class="related-products-wrapper">
+
+        <button v-show="showLeftButton" class="related-nav related-nav-left" @click="scrollRelated(-1)">
+          <i class="bi bi-chevron-left"></i>
+        </button>
+
+        <div ref="relatedContainer" class="related-products-list" @scroll="updateNavigation">
+          <section v-if="relatedProducts.length" class="related-products-section mt-5">
+            <div class="mb-3">
+              <span class="products-eyebrow">
+                También te puede interesar
+              </span>
+
+              <h2 class="related-products-title mb-0">
+                Productos relacionados
+              </h2>
+            </div>
+
+            <div class="related-products-list">
+              <NuxtLink v-for="relation in relatedProducts" :key="relation.item_id"
+                :to="`/products/${relation.product.product_id}`" class="related-product-card">
+                <div class="related-product-image-wrapper">
+                  <img :src="getRelatedProductImage(
+                    relation.product.image
+                  )" :alt="relation.product.short_name ||
+                    relation.product.name
+                    " class="related-product-image" loading="lazy">
+                </div>
+
+                <div class="related-product-content">
+                  <h3 class="related-product-name">
+                    {{
+                      relation.product.short_name ||
+                      relation.product.name
+                    }}
+                  </h3>
+
+                  <div class="related-product-code">
+                    {{ relation.product.code }}
+                  </div>
+
+                  <div class="related-product-measure">
+                    {{ relation.measure?.name }}
+                  </div>
+
+                  <div class="related-product-footer">
+                    <div>
+                      <div v-if="getRelatedProductPrice(relation) > 0" class="related-product-price">
+                        {{
+                          formatCurrency(
+                            getRelatedProductPrice(relation)
+                          )
+                        }}
+                      </div>
+
+                      <div class="related-product-measure">
+                        {{ relation.measure?.name }}
+                      </div>
+                    </div>
+
+                    <span class="related-product-arrow">
+                      <i class="bi bi-arrow-right" />
+                    </span>
+                  </div>
+                </div>
+              </NuxtLink>
+            </div>
+          </section>
+        </div>
+
+        <button v-show="showRightButton" class="related-nav related-nav-right" @click="scrollRelated(1)">
+          <i class="bi bi-chevron-right"></i>
+        </button>
+
+      </div>
+
+
+
     </template>
 
   </div>
@@ -221,6 +299,38 @@ type WarehouseProduct = {
   subcategory: ProductSubcategory | null
   taxes: ProductTax[]
   stock: ProductStock[]
+  related?: ProductRelation[]
+}
+
+type RelatedMeasure = {
+  measure_id: string
+  code: string
+  name: string
+  status: string
+  price?: number
+  discount?: number
+  quantity?: number
+}
+
+type RelatedProductData = {
+  product_id: string
+  code: string
+  name: string
+  short_name: string
+  description: string
+  image: string
+  currency: string
+  status: string
+}
+
+type ProductRelation = {
+  product_id: string
+  item_id: string
+  measure_id: string
+  quantity: number
+  status: string
+  product: RelatedProductData
+  measure: RelatedMeasure
 }
 
 const {
@@ -314,6 +424,35 @@ const formattedPrice = computed(() => {
   }).format(selectedStock.value?.price ?? 0)
 })
 
+const relatedProducts = computed<ProductRelation[]>(() => {
+  const currentProductId = product.value?.product_id
+
+  if (!currentProductId) {
+    return []
+  }
+
+  const seen = new Set<string>()
+
+  return (product.value?.related ?? []).filter((relation) => {
+    const relatedProductId =
+      relation.product?.product_id ??
+      relation.item_id
+
+    if (
+      relation.status !== 'active' ||
+      relation.product?.status !== 'active' ||
+      relatedProductId === currentProductId ||
+      seen.has(relatedProductId)
+    ) {
+      return false
+    }
+
+    seen.add(relatedProductId)
+
+    return true
+  })
+})
+
 async function addCurrentProductToCart() {
   await addItem({
     product_id: product.value!.product_id,
@@ -360,6 +499,61 @@ async function buyNow() {
       'No fue posible agregar el producto al carrito.'
   }
 }
+
+function getRelatedProductImage(image?: string): string {
+  if (!image) {
+    return '/images/product-placeholder.png'
+  }
+
+  return `/api/product-image?path=${encodeURIComponent(image)}`
+}
+
+function getRelatedProductPrice(
+  relation: ProductRelation
+): number {
+  return Number(
+    relation.measure?.price ??
+    relation.product?.price ??
+    0
+  )
+}
+
+function formatCurrency(value: number): string {
+  return new Intl.NumberFormat('es-MX', {
+    style: 'currency',
+    currency: 'MXN'
+  }).format(value)
+}
+
+const relatedContainer = ref<HTMLElement>()
+
+const showLeftButton = ref(false)
+const showRightButton = ref(false)
+
+function updateNavigation() {
+  const container = relatedContainer.value
+
+  if (!container) return
+
+  showLeftButton.value = container.scrollLeft > 10
+
+  showRightButton.value =
+    container.scrollLeft <
+    container.scrollWidth -
+    container.clientWidth -
+    10
+}
+
+function scrollRelated(direction: number) {
+  relatedContainer.value?.scrollBy({
+    left: direction * 900,
+    behavior: 'smooth'
+  })
+}
+
+onMounted(() => {
+  nextTick(updateNavigation)
+})
 
 useHead(() => ({
   title: product.value
