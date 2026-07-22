@@ -545,8 +545,38 @@ function updateNavigation() {
 }
 
 function scrollRelated(direction: number) {
-  relatedContainer.value?.scrollBy({
-    left: direction * 900,
+  const container = relatedContainer.value
+
+  if (!container) {
+    return
+  }
+
+  const card = container.querySelector<HTMLElement>(
+    '.related-product-card'
+  )
+
+  if (!card) {
+    return
+  }
+
+  const styles = window.getComputedStyle(container)
+  const gap = parseFloat(styles.columnGap || styles.gap) || 0
+  const cardWidth = card.offsetWidth + gap
+
+  const visibleCards = Math.max(
+    1,
+    Math.floor(
+      (container.clientWidth + gap) / cardWidth
+    )
+  )
+
+  const cardsToMove =
+    window.innerWidth < 576
+      ? 1
+      : visibleCards
+
+  container.scrollBy({
+    left: direction * cardWidth * cardsToMove,
     behavior: 'smooth'
   })
 }
