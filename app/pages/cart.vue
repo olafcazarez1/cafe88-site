@@ -178,10 +178,14 @@
 
                             <div class="d-flex align-items-center gap-2">
                                 <input :value="item.quantity" type="number" min="1" max="10"
-                                    class="form-control cart-quantity-input" @change="changeQuantity(
+                                    class="form-control cart-quantity-input"
+                                    :disabled="updatingItemId === item.cart_item_id" @change="changeQuantity(
                                         item.cart_item_id,
                                         Number(($event.target as HTMLInputElement).value)
-                                    )">
+                                    )" />
+
+                                <span v-if="updatingItemId === item.cart_item_id"
+                                    class="spinner-border spinner-border-sm" aria-hidden="true" />
 
                                 <button type="button" class="btn btn-link text-danger p-0 cart-remove"
                                     :disabled="removingItemId === item.cart_item_id"
@@ -484,6 +488,7 @@ const PAYMENT_METHOD_STORAGE_KEY = 'cafe88_payment_method'
 const {
     cart,
     pending,
+    updatingItemId,
     isEmpty,
     loadCart,
     updateItem,
@@ -776,15 +781,22 @@ function calculateDummyShipping() {
             : 130
 }
 
+const MAX_PRODUCT_QUANTITY = 10
+
 async function changeQuantity(
     cartItemId: string,
     quantity: number
 ) {
-    if (!Number.isFinite(quantity) || quantity < 1) {
+    if (!Number.isFinite(quantity)) {
         return
     }
 
-    await updateItem(cartItemId, quantity)
+    const safeQuantity = Math.min(
+        MAX_PRODUCT_QUANTITY,
+        Math.max(1, Math.trunc(quantity))
+    )
+
+    await updateItem(cartItemId, safeQuantity)
 }
 
 const amountForFreeShipping = computed(() => {

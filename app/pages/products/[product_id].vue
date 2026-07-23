@@ -402,12 +402,14 @@ const isAvailable = computed(() => {
   return Number(selectedStock.value?.quantity ?? 0) > 0
 })
 
-const maximumQuantity = computed(() => {
-  return Math.max(
-    1,
-    Math.floor(Number(selectedStock.value?.quantity ?? 1))
-  )
-})
+const maximumQuantity = 10
+
+// const maximumQuantity = computed(() => {
+//   return Math.max(
+//     1,
+//     Math.floor(Number(selectedStock.value?.quantity ?? 1))
+//   )
+// })
 
 const canPurchase = computed(() => {
   return Boolean(

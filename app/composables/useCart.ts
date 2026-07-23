@@ -16,6 +16,11 @@ export function useCart() {
         () => false
     )
 
+    const updatingItemId = useState<string | null>(
+        'shopping-cart-updating-item',
+        () => null
+    )
+
     const errorMessage = useState<string | null>(
         'shopping-cart-error',
         () => null
@@ -115,12 +120,12 @@ export function useCart() {
         cartItemId: string,
         quantity: number
     ) {
-        pending.value = true
+        updatingItemId.value = cartItemId
         errorMessage.value = null
 
         try {
             cart.value = await $fetch<ShoppingCart>(
-                `/api/cart/items/${cartItemId}`,
+                `/api/cart/items/${encodeURIComponent(cartItemId)}`,
                 {
                     method: 'PATCH',
                     body: {
@@ -136,7 +141,7 @@ export function useCart() {
 
             throw error
         } finally {
-            pending.value = false
+            updatingItemId.value = null
         }
     }
 
@@ -197,6 +202,7 @@ export function useCart() {
     return {
         cart,
         pending,
+        updatingItemId,
         errorMessage,
         itemCount,
         isEmpty,
