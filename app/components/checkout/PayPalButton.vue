@@ -157,17 +157,19 @@ async function renderPayPalButton() {
         },
 
         createOrder: async () => {
-            errorMessage.value = ''
-
             const order = await $fetch<{
                 id: string
-            }>('/api/paypal/orders', {
-                method: 'POST',
+                status: string
+            }>(
+                '/api/paypal/orders',
+                {
+                    method: 'POST',
 
-                body: {
-                    shipping_cost: props.shippingCost
+                    body: {
+                        delivery_address: props.deliveryAddress,
+                    }
                 }
-            })
+            )
 
             return order.id
         },
@@ -185,34 +187,7 @@ async function renderPayPalButton() {
                         method: 'POST',
 
                         body: {
-                            delivery_address: {
-                                name:
-                                    props.deliveryAddress.name,
-
-                                email:
-                                    props.deliveryAddress.email,
-
-                                phone:
-                                    props.deliveryAddress.phone,
-
-                                street:
-                                    props.deliveryAddress.street,
-
-                                exterior_number:
-                                    props.deliveryAddress.exteriorNumber,
-
-                                interior_number:
-                                    props.deliveryAddress.interiorNumber,
-
-                                neighborhood:
-                                    props.deliveryAddress.neighborhood,
-
-                                postal_code:
-                                    props.deliveryAddress.postalCode,
-
-                                reference:
-                                    props.deliveryAddress.reference
-                            }
+                            delivery_address: props.deliveryAddress
                         }
                     }
                 )
