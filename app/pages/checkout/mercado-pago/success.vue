@@ -161,6 +161,17 @@ async function completeCheckout() {
             )
         }
 
+        console.log(
+            '[Mercado Pago] Success checkout payload:',
+            {
+                payment_id:
+                    paymentId.value,
+
+                delivery_address:
+                    checkoutSummary.address
+            }
+        )
+
         const completedCheckout =
             await $fetch<MercadoPagoCheckoutResponse>(
                 '/api/mercado-pago/checkout',
