@@ -125,6 +125,20 @@ export default defineEventHandler(async (event) => {
             }
         })
 
+        console.log('[Mercado Pago] URLs:', {
+            success:
+                `${baseUrl}/checkout/mercado-pago/success`,
+
+            pending:
+                `${baseUrl}/checkout/mercado-pago/pending`,
+
+            failure:
+                `${baseUrl}/checkout/mercado-pago/failure`,
+
+            webhook:
+                `${baseUrl}/api/mercado-pago/webhook`
+        })
+
         await erpFetch(
             event,
             `/api/shopping-cart/checkout-intent/${encodeURIComponent(

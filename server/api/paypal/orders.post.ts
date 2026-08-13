@@ -102,7 +102,7 @@ export default defineEventHandler(async (event) => {
     const shippingCost =
         productsTotal >= 2500
             ? 0
-            : 130
+            : 1
 
     const orderTotal =
         productsTotal + shippingCost

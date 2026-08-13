@@ -778,7 +778,7 @@ function calculateDummyShipping() {
     shippingCost.value =
         subtotal >= 2500
             ? 0
-            : 130
+            : 1
 }
 
 const MAX_PRODUCT_QUANTITY = 10
