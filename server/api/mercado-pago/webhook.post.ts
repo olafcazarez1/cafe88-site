@@ -38,16 +38,6 @@ export default defineEventHandler(async (event) => {
      * Only payment notifications belong to this processor.
      * Other configured topics are acknowledged and ignored.
      */
-
-    console.log(
-        '[Mercado Pago] Webhook received:',
-        {
-            notificationType,
-            query,
-            body
-        }
-    )
-
     if (notificationType !== 'payment') {
         return {
             received: true,

@@ -517,17 +517,6 @@ async function startMercadoPagoCheckout() {
                 ? response.sandbox_init_point
                 : response.init_point
 
-        console.log('Mercado Pago preference:', {
-            preference_id:
-                response.preference_id,
-
-            init_point:
-                response.init_point,
-
-            sandbox_init_point:
-                response.sandbox_init_point
-        })
-
     } catch (error) {
 
         console.error(error)

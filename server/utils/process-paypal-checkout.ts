@@ -296,8 +296,6 @@ export async function processPayPalCheckout(
             intent.delivery_address
     }
 
-    console.log(resolvedAddress, deliveryAddress)
-
     if (!resolvedAddress) {
         throw createError({
             statusCode: 409,
