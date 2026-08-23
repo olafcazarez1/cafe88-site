@@ -39,11 +39,11 @@ export default defineNuxtConfig({
         },
         {
           property: 'og:image:width',
-          content: '512'
+          content: '1200'
         },
         {
           property: 'og:image:height',
-          content: '512'
+          content: '630'
         },
         {
           property: 'og:image:alt',
