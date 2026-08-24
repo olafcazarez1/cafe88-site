@@ -9,6 +9,10 @@ export default defineNuxtConfig({
 
   app: {
     head: {
+      htmlAttrs: {
+        lang: 'es-MX'
+      },
+
       title: 'Café 88 y Faja de Oro',
 
       meta: [
@@ -17,6 +21,13 @@ export default defineNuxtConfig({
           content: 'Café veracruzano de altura y productos gourmet elaborados con tradición, calidad y pasión.'
         },
 
+        {
+          name: 'robots',
+          content: 'index, follow, max-image-preview:large'
+        },
+
+        // Open Graph
+        // Facebook, Instagram, WhatsApp, LinkedIn
         {
           property: 'og:title',
           content: 'Café 88 y Faja de Oro'
@@ -34,6 +45,14 @@ export default defineNuxtConfig({
           content: 'https://cafe88.mx/'
         },
         {
+          property: 'og:site_name',
+          content: 'Café 88'
+        },
+        {
+          property: 'og:locale',
+          content: 'es_MX'
+        },
+        {
           property: 'og:image',
           content: 'https://cafe88.mx/images/social/cafe88.png'
         },
@@ -49,9 +68,23 @@ export default defineNuxtConfig({
           property: 'og:image:alt',
           content: 'Café 88'
         },
+
+        // X / Twitter
         {
           name: 'twitter:card',
           content: 'summary_large_image'
+        },
+        {
+          name: 'twitter:title',
+          content: 'Café 88 y Faja de Oro'
+        },
+        {
+          name: 'twitter:description',
+          content: 'Café veracruzano de altura y productos gourmet elaborados con tradición, calidad y pasión.'
+        },
+        {
+          name: 'twitter:image',
+          content: 'https://cafe88.mx/images/social/cafe88.png'
         }
       ],
 
