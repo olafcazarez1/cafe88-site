@@ -577,6 +577,13 @@ function normalizeSearchValue(
 }
 
 useHead({
-  title: 'Productos | Café88'
+  title: 'Productos | Café88',
+
+  link: [
+    {
+      rel: 'canonical',
+      href: 'https://cafe88.mx/products'
+    }
+  ]
 })
 </script>

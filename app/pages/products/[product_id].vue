@@ -355,6 +355,65 @@ const {
   () => `/api/products/${productId.value}`
 )
 
+const siteUrl = 'https://cafe88.mx'
+
+const canonicalUrl = computed(() => {
+  return `${siteUrl}/products/${productId.value}`
+})
+
+const seoTitle = computed(() => {
+  return product.value?.short_name
+    ? `${product.value.short_name} | Café 88`
+    : 'Producto | Café 88'
+})
+
+const seoDescription = computed(() => {
+  return product.value?.description ||
+    'Café veracruzano de altura y productos gourmet de Café 88.'
+})
+
+const seoImage = computed(() => {
+  const image = product.value?.image_url
+
+  if (!image) {
+    return `${siteUrl}/images/social/cafe88.png`
+  }
+
+  if (image.startsWith('http://') || image.startsWith('https://')) {
+    return image
+  }
+
+  return `${siteUrl}${image.startsWith('/') ? '' : '/'}${image}`
+})
+
+useSeoMeta({
+  title: () => seoTitle.value,
+  description: () => seoDescription.value,
+
+  robots: 'index, follow, max-image-preview:large',
+
+  ogTitle: () => seoTitle.value,
+  ogDescription: () => seoDescription.value,
+  ogType: 'product',
+  ogUrl: () => canonicalUrl.value,
+  ogImage: () => seoImage.value,
+  ogImageAlt: () => product.value?.short_name || 'Café 88',
+
+  twitterCard: 'summary_large_image',
+  twitterTitle: () => seoTitle.value,
+  twitterDescription: () => seoDescription.value,
+  twitterImage: () => seoImage.value
+})
+
+useHead({
+  link: [
+    {
+      rel: 'canonical',
+      href: canonicalUrl
+    }
+  ]
+})
+
 const quantity = ref(1)
 const selectedMeasureId = ref('')
 

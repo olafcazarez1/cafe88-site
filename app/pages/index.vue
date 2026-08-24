@@ -376,4 +376,15 @@ const featuredProducts = [
     to: '/products/ba7e6704-34f2-49a3-beac-7cac89ec025f'
   }
 ]
+
+useHead({
+  title: 'Café 88 y Faja de Oro',
+
+  link: [
+    {
+      rel: 'canonical',
+      href: 'https://cafe88.mx/'
+    }
+  ]
+})
 </script>

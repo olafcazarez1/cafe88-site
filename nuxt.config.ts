@@ -86,14 +86,8 @@ export default defineNuxtConfig({
           name: 'twitter:image',
           content: 'https://cafe88.mx/images/social/cafe88.png'
         }
-      ],
-
-      link: [
-        {
-          rel: 'canonical',
-          href: 'https://cafe88.mx/'
-        }
       ]
+
     }
   },
 
