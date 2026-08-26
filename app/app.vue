@@ -10,6 +10,27 @@ useHead({
     {
       rel: 'stylesheet',
       href: 'https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap'
+    },
+    {
+      rel: 'icon',
+      type: 'image/x-icon',
+      href: '/favicon.ico'
+    },
+    {
+      rel: 'icon',
+      type: 'image/png',
+      sizes: '32x32',
+      href: '/favicon-32x32.png'
+    },
+    {
+      rel: 'icon',
+      type: 'image/png',
+      sizes: '96x96',
+      href: '/favicon-96x96.png'
+    },
+    {
+      rel: 'apple-touch-icon',
+      href: '/apple-touch-icon.png'
     }
   ],
 
