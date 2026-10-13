@@ -2178,129 +2178,92 @@ body {
     right: -32px;
 }
 
-.payment-failure {
-    display: block;
-    width: 100%;
-    max-width: 620px;
-    margin: 1.5rem auto;
-    padding: clamp(1.5rem, 4vw, 2.5rem);
-    text-align: initial;
-}
-
-.payment-failure-header {
+/* Payment information */
+.payment-failure .payment-failure-details {
     display: flex;
     flex-direction: column;
+    gap: 0;
+    padding: 1rem 1.25rem;
+}
+
+.payment-failure .payment-failure-row {
+    display: flex;
     align-items: center;
-}
-
-.payment-failure-header p {
-    max-width: 470px;
-    line-height: 1.7;
-}
-
-.payment-failure-details {
-    display: block;
-    min-width: 0;
-}
-
-.payment-failure-row {
-    display: grid;
-    grid-template-columns: minmax(130px, 0.8fr) minmax(0, 1.2fr);
-    gap: 0.75rem;
-    align-items: start;
+    justify-content: space-between;
+    gap: 1rem;
     padding: 0.85rem 0;
+    border-bottom: 1px solid #e8ded6;
 }
 
-.payment-failure-row+.payment-failure-row {
-    border-top: 1px solid var(--cafe88-border, #e6ded8);
+.payment-failure .payment-failure-row:last-child {
+    border-bottom: 0;
 }
 
-.payment-failure-row>span:first-child {
-    color: var(--cafe88-muted, #8b7a72);
+.payment-failure .payment-failure-row > span:first-child {
+    color: #786e68;
+    flex-shrink: 0;
 }
 
-.payment-failure-row strong {
+.payment-failure .payment-failure-row strong {
     min-width: 0;
+    text-align: right;
     overflow-wrap: anywhere;
-    font-weight: 600;
+    font-size: 0.875rem;
 }
 
-.payment-failure-row .badge {
-    justify-self: start;
-}
-
-.payment-failure-actions {
+/* Action buttons */
+.payment-failure .payment-failure-actions {
     display: grid;
-    grid-template-columns: minmax(0, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 0.75rem;
 }
 
-.payment-failure-actions .btn {
+.payment-failure .payment-failure-actions .btn {
     display: flex;
-    width: 100%;
-    min-height: 46px;
     align-items: center;
     justify-content: center;
-    white-space: normal;
-}
-
-@media (max-width: 575.98px) {
-    .payment-failure {
-        margin: 0.5rem auto;
-        padding: 1.25rem;
-        border-radius: 16px;
-    }
-
-    .payment-failure-row {
-        grid-template-columns: minmax(0, 1fr);
-        gap: 0.25rem;
-    }
-}
-
-/* Payment details */
-.failure-details {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    gap: 1.5rem;
-    align-items: center;
-}
-
-.failure-reference {
-    min-width: 0;
-}
-
-.failure-reference strong {
-    overflow-wrap: anywhere;
-}
-
-/* Actions */
-.failure-actions {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 0.75rem;
-}
-
-.failure-actions .btn {
-    display: flex;
-    min-height: 52px;
-    align-items: center;
-    justify-content: center;
-    gap: 0.4rem;
-    padding: 0.65rem;
+    min-height: 48px;
+    padding: 0.75rem 1rem;
     line-height: 1.3;
+    text-align: center;
+}
+
+.payment-failure .payment-failure-actions .btn:last-child {
+    grid-column: 1 / -1;
+}
+
+.payment-failure .payment-failure-row strong {
+    min-width: 0;
+    max-width: 65%;
+    text-align: right;
+    overflow-wrap: anywhere;
+    font-size: 0.875rem;
 }
 
 @media (max-width: 575.98px) {
-    .failure-details {
-        grid-template-columns: 1fr;
-        gap: 0.75rem;
+    .payment-failure .payment-failure-row strong {
+        max-width: 100%;
+        text-align: left;
+    }
+}
+
+/* Mobile */
+@media (max-width: 575.98px) {
+    .payment-failure .payment-failure-row {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 0.35rem;
     }
 
-    .failure-actions {
+    .payment-failure .payment-failure-row strong {
+        text-align: left;
+    }
+
+    .payment-failure .payment-failure-actions {
         grid-template-columns: 1fr;
     }
 
-    .failure-actions .btn {
-        width: 100%;
+    .payment-failure .payment-failure-actions .btn:last-child {
+        grid-column: auto;
     }
 }
