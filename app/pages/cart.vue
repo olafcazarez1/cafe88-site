@@ -245,7 +245,7 @@
                             <span>Envío</span>
 
                             <small v-if="shippingCost > 0" class="d-block text-muted">
-                                Gratis en compras desde $2,500 MXN
+                                Gratis en compras desde $2,000 MXN
                             </small>
 
                             <small v-else class="d-block text-success">
