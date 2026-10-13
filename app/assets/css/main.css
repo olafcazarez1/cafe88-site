@@ -998,10 +998,10 @@ body {
   text-align: left;
 }
 
-.checkout-payment-result > div {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
+.checkout-payment-result > .summary-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
 }
 
 .checkout-summary {
