@@ -776,7 +776,7 @@ function calculateDummyShipping() {
     )
 
     shippingCost.value =
-        subtotal >= 2500
+        subtotal >= 2000
             ? 0
             : 130
 }
@@ -802,7 +802,7 @@ async function changeQuantity(
 const amountForFreeShipping = computed(() => {
     return Math.max(
         0,
-        2500 - Number(cart.value?.totals.subtotal ?? 0)
+        2000 - Number(cart.value?.totals.subtotal ?? 0)
     )
 })
 

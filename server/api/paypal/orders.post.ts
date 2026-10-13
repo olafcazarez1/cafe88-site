@@ -100,7 +100,7 @@ export default defineEventHandler(async (event) => {
         Number(cart.totals.total)
 
     const shippingCost =
-        productsTotal >= 2500
+        productsTotal >= 2000
             ? 0
             : 130
 
