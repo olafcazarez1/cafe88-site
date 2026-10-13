@@ -1,50 +1,40 @@
 <template>
     <main class="container py-5">
-        <section class="checkout-payment-result mx-auto text-center">
-            <div class="payment-result-icon is-error mb-3">
-                <i class="bi bi-x-lg" aria-hidden="true" />
+        <section class="checkout-payment-result payment-failure mx-auto">
+            <div class="payment-failure-header text-center">
+                <div class="payment-result-icon is-error mb-3">
+                    <i class="bi bi-x-lg" aria-hidden="true" />
+                </div>
+
+                <div class="products-eyebrow mb-2">Pago no completado</div>
+
+                <h1 class="h3 mb-3">No fue posible completar el pago</h1>
+
+                <p class="text-muted mb-0">
+                    La operación no se completó en Mercado Pago.
+                    Si no se realizó ningún cargo, puedes intentarlo nuevamente.
+                    Si observas un cargo, contáctanos antes de volver a pagar.
+                </p>
             </div>
 
-            <span class="products-eyebrow">
-                Pago no completado
-            </span>
-
-            <h1 class="h3 mt-2">
-                No fue posible completar el pago
-            </h1>
-
-            <p class="text-muted">
-                Mercado Pago canceló o rechazó la operación.
-                Tu carrito permanece disponible y puedes intentarlo nuevamente.
-            </p>
-
-            <div v-if="paymentId || externalReference" class="payment-result-details mt-4 text-start">
-                <div v-if="paymentId" class="summary-row">
+            <div v-if="paymentId || externalReference" class="payment-result-details payment-failure-details mt-4">
+                <div v-if="paymentId" class="payment-failure-row">
                     <span>Referencia de pago</span>
-
-                    <strong class="text-break">
-                        {{ paymentId }}
-                    </strong>
+                    <strong>{{ paymentId }}</strong>
                 </div>
 
-                <div v-if="externalReference" class="summary-row">
+                <div v-if="externalReference" class="payment-failure-row">
                     <span>Referencia del carrito</span>
-
-                    <strong class="text-break">
-                        {{ externalReference }}
-                    </strong>
+                    <strong>{{ externalReference }}</strong>
                 </div>
 
-                <div class="summary-row">
+                <div class="payment-failure-row">
                     <span>Estado</span>
-
-                    <span class="badge text-bg-danger">
-                        No completado
-                    </span>
+                    <span class="badge text-bg-danger">No completado</span>
                 </div>
             </div>
 
-            <div class="d-grid gap-2 mt-4">
+            <div class="payment-failure-actions mt-4">
                 <NuxtLink to="/checkout/review" class="btn btn-cafe88">
                     Intentar nuevamente
                 </NuxtLink>
@@ -55,7 +45,6 @@
 
                 <a :href="whatsappSupportUrl" class="btn btn-outline-success" target="_blank" rel="noopener noreferrer">
                     <i class="bi bi-whatsapp me-2" aria-hidden="true" />
-
                     Contactar por WhatsApp
                 </a>
             </div>
@@ -66,26 +55,24 @@
 <script setup lang="ts">
 const route = useRoute()
 
-const paymentId = computed(() => {
-    return String(
-        route.query.payment_id ??
-        route.query.collection_id ??
-        ''
-    ).trim()
-})
+function cleanQueryValue(value: unknown): string {
+    const candidate = Array.isArray(value) ? value[0] : value
+    if (typeof candidate !== 'string') return ''
+    const cleaned = candidate.trim()
+    return ['null', 'undefined', ''].includes(cleaned.toLowerCase()) ? '' : cleaned
+}
 
-const externalReference = computed(() => {
-    return String(
-        route.query.external_reference ??
-        ''
-    ).trim()
-})
+const paymentId = computed(() =>
+    cleanQueryValue(route.query.payment_id) ||
+    cleanQueryValue(route.query.collection_id)
+)
+
+const externalReference = computed(() =>
+    cleanQueryValue(route.query.external_reference)
+)
 
 const whatsappSupportUrl = computed(() => {
-    const reference =
-        paymentId.value ||
-        externalReference.value
-
+    const reference = paymentId.value || externalReference.value
     const message = reference
         ? `Hola Café88, tengo una duda sobre un pago no completado de Mercado Pago. Referencia: ${reference}.`
         : 'Hola Café88, tengo una duda sobre un pago no completado de Mercado Pago.'
@@ -93,7 +80,5 @@ const whatsappSupportUrl = computed(() => {
     return `https://wa.me/522299063799?text=${encodeURIComponent(message)}`
 })
 
-useHead({
-    title: 'Pago no completado | Cafe88'
-})
+useHead({ title: 'Pago no completado | Café88' })
 </script>

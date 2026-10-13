@@ -2177,3 +2177,82 @@ body {
 .related-nav-right {
     right: -32px;
 }
+
+.payment-failure {
+    display: block;
+    width: 100%;
+    max-width: 620px;
+    margin: 1.5rem auto;
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+    text-align: initial;
+}
+
+.payment-failure-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.payment-failure-header p {
+    max-width: 470px;
+    line-height: 1.7;
+}
+
+.payment-failure-details {
+    display: block;
+    min-width: 0;
+}
+
+.payment-failure-row {
+    display: grid;
+    grid-template-columns: minmax(130px, 0.8fr) minmax(0, 1.2fr);
+    gap: 0.75rem;
+    align-items: start;
+    padding: 0.85rem 0;
+}
+
+.payment-failure-row+.payment-failure-row {
+    border-top: 1px solid var(--cafe88-border, #e6ded8);
+}
+
+.payment-failure-row>span:first-child {
+    color: var(--cafe88-muted, #8b7a72);
+}
+
+.payment-failure-row strong {
+    min-width: 0;
+    overflow-wrap: anywhere;
+    font-weight: 600;
+}
+
+.payment-failure-row .badge {
+    justify-self: start;
+}
+
+.payment-failure-actions {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.75rem;
+}
+
+.payment-failure-actions .btn {
+    display: flex;
+    width: 100%;
+    min-height: 46px;
+    align-items: center;
+    justify-content: center;
+    white-space: normal;
+}
+
+@media (max-width: 575.98px) {
+    .payment-failure {
+        margin: 0.5rem auto;
+        padding: 1.25rem;
+        border-radius: 16px;
+    }
+
+    .payment-failure-row {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 0.25rem;
+    }
+}
